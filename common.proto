@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package erp;
+
+enum OperationStatus {
+  success = 0;
+  failure = 1;
+}
+
+enum Gender {
+  MALE = 0;
+  FEMALE = 1;
+  OTHERS = 2;
+}
+
+enum Salutation {
+  MR = 0;
+  MS = 1;
+  MISS = 2;
+  MRS = 3;
+  DR = 4;
+  PROF = 5;
+}
+
+message InsertionCompleteResponse{
+  OperationStatus operation_status = 1;
+  optional string insertion_status = 2;
+  optional int32 assigned_id = 3;
+}
+
+message RemovalCompleteResponse {
+  OperationStatus operation_status = 1;
+  optional string removal_status = 2;
+}
+
+message UpdationCompleteResponse {
+    OperationStatus operation_status = 1;
+    optional string updation_status = 2;
+}

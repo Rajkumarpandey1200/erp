@@ -1,0 +1,63 @@
+syntax = "proto3";
+import "common.proto";
+package erp;
+
+service ContactService {
+  rpc ContactGetDetails(GetContactRecords) returns (ViewContactResponse) {}
+  rpc AddContact(ContactInfo) returns ( InsertionCompleteResponse) {}
+  rpc UpdateContact(ContactInfo) returns (UpdationCompleteResponse) {}
+  rpc RemoveContact(ContactIdRequest) returns (RemovalCompleteResponse) {}
+  rpc GetContactRecord (ContactIdRequest) returns (ContactInfo) {}
+}
+
+enum ContactStatus {  
+  PASSIVE = 0;
+  ACTIVE = 1;
+}
+
+
+message GetContactRecords {
+  int32 startingPosition = 1;
+  int32 endingPosition = 2;
+}
+
+message ContactIdRequest {
+  int32 contact_ID = 1;
+}
+
+
+message ViewContactResponse {
+    int32 totalNumberOfContacts = 1;    
+    repeated ContactInfo contacts = 2;    
+}
+
+enum Type {  
+  SECONDARY = 0;
+  PRIMARY = 1;
+  } 
+
+
+message ContactEmailAddress {  
+  Type address_type = 1;
+  string email = 2;
+}
+
+message ContactNumber {
+  Type number_type = 1;
+  string contact_number = 2;  
+}
+
+
+message ContactInfo {
+  int32 contact_id = 1;
+  string first_name = 2;   
+  string last_name = 3;   
+  string designation = 4;
+  repeated ContactEmailAddress contact_emails = 5;
+  repeated ContactNumber contact_numbers = 6;
+  string organization = 7;
+  Gender gender = 8;
+  Salutation salutation = 9;
+  ContactStatus status = 10;
+  optional string middle_name = 11;
+}
